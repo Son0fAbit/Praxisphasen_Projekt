@@ -9,21 +9,25 @@ import HelloWorldTab from "@/components/HelloWorld.vue";
 Vue.use(Router);
 
 export default new Router({
+    mode: "hash",
   routes: [
     {
         path: "",
         component: HelloWorldTab
       },
     {
-      path: "start",
+      path: "/start",
+      name: 'start',
       component: HelloWorldTab 
     },
     {
-        path: "task",
+        path: "/task",
+        name: 'task',
         component: TaskTab
       },
       {
-        path: "project",
+        path: "/project",
+        name: 'project',
         component: ProjectTab
       }
     // {
@@ -42,5 +46,4 @@ export default new Router({
     //   ]
     // }
   ],
-  mode: "history"
 });

@@ -4,7 +4,7 @@
     <v-app-bar app >
       <v-app-bar-nav-icon @click="toggle=!toggle"></v-app-bar-nav-icon>
       
-      <v-tab to="/start">Start</v-tab>
+      <v-tab to="/">Start</v-tab>
       <v-tab to="/project">Hilfe</v-tab>
       <v-tab to="/task">Kontakt</v-tab>
 
@@ -43,7 +43,7 @@ export default {
   },
 
   data: () => ({
-    toggle: null,
+    toggle: false,
   }),
 };
 </script>
