@@ -34,7 +34,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                New Item
+                Add Redirect
               </v-btn>
             </template>
             <v-card>
@@ -55,7 +55,7 @@
                         label="Dessert name"
                       ></v-text-field>
                     </v-col>
-                    <v-col
+                    <!-- <v-col
                       cols="12"
                       sm="6"
                       md="4"
@@ -64,7 +64,7 @@
                         v-model="editedItem.calories"
                         label="Calories"
                       ></v-text-field>
-                    </v-col>
+                    </v-col> -->
                     <v-col
                       cols="12"
                       sm="6"
@@ -173,7 +173,7 @@
             dialogDelete: false,
             headers: [
             {
-                text: 'Dessert (100g serving)',
+                text: 'Target Link',
                 align: 'start',
                 //sortable: false,
                 value: 'name',
