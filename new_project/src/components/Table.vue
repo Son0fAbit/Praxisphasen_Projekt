@@ -175,7 +175,7 @@
             {
                 text: 'Dessert (100g serving)',
                 align: 'start',
-                sortable: false,
+                //sortable: false,
                 value: 'name',
             },
             { text: 'Calories', value: 'calories' },
