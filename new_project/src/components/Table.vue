@@ -16,13 +16,6 @@
         <v-toolbar
           flat
         >
-          <v-toolbar-title>My CRUD</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          ></v-divider>
-          <v-spacer></v-spacer>
 
 <!-- //SEARCH -->
           <v-text-field
