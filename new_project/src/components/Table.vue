@@ -86,10 +86,13 @@
                       sm="6"
                       md="4"
                     >
-                      <v-text-field
+                      <v-select
+                      :items="items"
                         v-model="editedItem.domain"
                         label="Domain"
-                      ></v-text-field>
+                      ></v-select>
+
+
                     </v-col>
                     <v-col
                       cols="12"
