@@ -58,7 +58,7 @@
                     >
                       <v-text-field
                         v-model="editedItem.name"
-                        label="Dessert name"
+                        label="Target-URL"
                       ></v-text-field>
                     </v-col>
                     <!-- <v-col
@@ -180,16 +180,16 @@
             dialogDelete: false,
             headers: [
             {
-                text: 'Target Link',
+                text: 'Target-URL',
                 align: 'start',
                 //sortable: false,
                 value: 'name',
             },
-            { text: 'Calories', value: 'calories' },
-            { text: 'Fat (g)', value: 'fat' },
-            { text: 'Carbs (g)', value: 'carbs' },
-            { text: 'Protein (g)', value: 'protein' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            //{ text: 'Calories', value: 'calories' },
+            { text: 'Destination-URL', value: 'fat' },
+            { text: 'Domain', value: 'carbs' },
+            { text: 'created', value: 'protein' },
+            { text: '', value: 'actions', sortable: false },
             ],
             desserts: [],
             editedIndex: -1,
