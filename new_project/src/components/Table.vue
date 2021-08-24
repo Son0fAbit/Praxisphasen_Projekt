@@ -8,6 +8,7 @@
           <v-data-table
       :headers="headers"
       :items="desserts"
+      :search="search"
       sort-by="calories"
       class="elevation-1"
     >
@@ -22,6 +23,18 @@
             vertical
           ></v-divider>
           <v-spacer></v-spacer>
+
+<!-- //SEARCH -->
+          <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+
+        <v-spacer></v-spacer>
+
           <v-dialog
             v-model="dialog"
             max-width="500px"
@@ -169,6 +182,7 @@
 
     data: () => ({
 
+            search: '',
             dialog: false,
             dialogDelete: false,
             headers: [
