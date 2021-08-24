@@ -5,7 +5,7 @@
       <v-app-bar-nav-icon @click="toggle=!toggle"></v-app-bar-nav-icon>
       
       <v-tab to="/">Start</v-tab>
-      <v-tab to="/project">Hilfe</v-tab>
+      <v-tab to="/table">Tabelle</v-tab>
       <v-tab to="/task">Kontakt</v-tab>
 
       <v-toolbar-title>     DX Dashboard</v-toolbar-title>

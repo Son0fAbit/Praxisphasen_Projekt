@@ -3,7 +3,7 @@ import Router from "vue-router";
 // import HomePage from "@/components/HomePage.vue";
 // import User1 from "@/components/User.vue";
 import TaskTab from "@/components/Task.vue";
-import ProjectTab from "@/components/Project.vue";
+import TableTab from "@/components/Table.vue";
 import HelloWorldTab from "@/components/HelloWorld.vue";
 
 Vue.use(Router);
@@ -26,9 +26,9 @@ export default new Router({
         component: TaskTab
       },
       {
-        path: "/project",
-        name: 'project',
-        component: ProjectTab
+        path: "/table",
+        name: 'table',
+        component: TableTab
       }
     // {
     //   path: "/user/:id",
