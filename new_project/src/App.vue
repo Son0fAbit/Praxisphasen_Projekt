@@ -1,6 +1,8 @@
 <template>
   <div id="app">
   <v-app>
+
+  <!-- Tabbar -->
     <v-app-bar app >
       <v-app-bar-nav-icon @click="toggle=!toggle"></v-app-bar-nav-icon>
       
@@ -10,6 +12,9 @@
 
       <v-toolbar-title>     DX Dashboard</v-toolbar-title>
     </v-app-bar>
+  <!-- Tabbar -->
+
+<!-- Navbar = -->
     <v-navigation-drawer v-model="toggle" bottom color="primary" dark app>
       <v-list nav>
         <v-list-item v-for="item, i of ['Start', 'Hinzufügen', 'Hilfe']" :key="i">
@@ -17,13 +22,14 @@
         </v-list-item>
         </v-list>
     </v-navigation-drawer>
+<!-- Navbar = -->
+
     <v-content>
       <v-container grid-list-xl>
         
-        
+        <!-- Inhalt der Seite -->
         <router-view></router-view> 
-        
-        <!-- <HelloWorld/> -->
+        <!-- Inhalt der Seite -->
 
 
       </v-container>
@@ -50,6 +56,7 @@
           </v-btn>
         </v-card-text>
   
+  <!-- Footer -->
         <v-card-text class="white--text pt-0">
           Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer  
           Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer
@@ -63,6 +70,8 @@
         </v-card-text>
       </v-card>
     </v-footer>
+  <!-- Footer -->
+
   </v-app>
 </div>
 </template>
