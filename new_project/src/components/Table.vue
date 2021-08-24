@@ -174,6 +174,8 @@
 
     data: () => ({
 
+       items: ['Ich', 'Teste', 'Hier', 'Einfach', 'Nur'],
+
             search: '',
             dialog: false,
             dialogDelete: false,
