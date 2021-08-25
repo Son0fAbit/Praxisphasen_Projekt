@@ -10,8 +10,12 @@
       :headers="headers"
       :items="links"
       :search="search"
+      :footer-props="{
+        'items-per-page-options':[5,10,20,50,-1]
+      }"
       sort-by="Target-URL"
       class="elevation-1"
+      
     >
       <template v-slot:top>
         <v-toolbar
