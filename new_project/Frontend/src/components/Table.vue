@@ -69,6 +69,7 @@
                       <v-text-field
                         v-model="editedItem.from"
                         label="Target-URL"
+                        clearable
                       ></v-text-field>
                     </v-col>
                     <!-- <v-col
@@ -89,6 +90,7 @@
                       <v-text-field
                         v-model="editedItem.to"
                         label="Destination-URL"
+                        clearable
                       ></v-text-field>
                     </v-col>
                     <v-col
