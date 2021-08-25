@@ -50,6 +50,11 @@
               </v-card-title>
   
               <v-card-text>
+                <div>
+                    <v-alert class="mt-2 mb-2"  dense type="error" :value="alert" transition="slide-y-transition" >
+                      Please fill out the whole form
+                    </v-alert> 
+                </div>
                 <v-container>
                   <v-row>
                     <v-col
@@ -180,18 +185,18 @@
 
       //Importing db functions
        
-
-       items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
+      alert: false,
+      items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
 
             search: '',
             dialog: false,
             dialogDelete: false,
             headers: [
             {
-                text: 'Target-URL',
-                align: 'start',
-                //sortable: false,
-                value: 'from',
+              text: 'Target-URL',
+              align: 'start',
+              //sortable: false,
+              value: 'from',
             },
             //{ text: 'Calories', value: 'calories' },
             { text: 'Destination-URL', value: 'to' },
@@ -271,6 +276,7 @@
 
             close () {
             this.dialog = false
+            this.alert = false
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -288,7 +294,7 @@
             async save () {
 
             if(this.editedItem.from == this.defaultItem.from || this.editedItem.to == this.defaultItem.to || this.editedItem.domain == this.defaultItem.domain ){
-              alert("All values must be set");
+              this.alert = true;
               return
             }
 
@@ -309,5 +315,7 @@
         },
   }
 </script> 
+
+
 
 
