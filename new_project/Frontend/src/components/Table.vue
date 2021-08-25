@@ -3,8 +3,9 @@
       
       
       <div class="table">
+        <div key="headline">
           <h1>Hello I am the Database tab</h1>
-
+      </div>
           <v-data-table
       :headers="headers"
       :items="links"
@@ -170,13 +171,16 @@
 
 <script>
 
-  
+  const db = require ("../dblogic/dbreq");
 
   export default {
     name: 'Table',
 
     data: () => ({
-       db:require("../dblogic/dbreq"),
+
+      //Importing db functions
+       
+
        items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
 
             search: '',
@@ -236,7 +240,7 @@
         methods: {
 
              async initalize(){
-              var links = await this.db.getLinks()
+              var links = await db.getLinks()
               return new Promise((resolve) => {
                 resolve(links)
               })
@@ -260,7 +264,7 @@
             },
 
             deleteItemConfirm () {
-            this.db.deleteLink(this.links[this.editedIndex].id)
+            db.deleteLink(this.links[this.editedIndex].id)
             this.links.splice(this.editedIndex, 1)
             this.closeDelete()
             },
@@ -289,10 +293,10 @@
             }
 
             if (this.editedIndex > -1) {
-                this.db.updateLink(this.links[this.editedIndex].id,this.editedItem)
+                db.updateLink(this.links[this.editedIndex].id,this.editedItem)
                 Object.assign(this.links[this.editedIndex], this.editedItem)
             } else {
-                this.db.insertLink(this.editedItem)
+                db.insertLink(this.editedItem)
 
                 //Übergangslösung, es werden alle Daten neu geladen, effizienter wäre es nur das eine Object zu laden und dann im Array hinzuzufügen
                 // ist nötig weil Datenbank ID und Datum hinzufügt.
@@ -305,4 +309,5 @@
         },
   }
 </script> 
+
 
