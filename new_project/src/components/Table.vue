@@ -9,7 +9,7 @@
       :headers="headers"
       :items="links"
       :search="search"
-      sort-by="calories"
+      sort-by="Target-URL"
       class="elevation-1"
     >
       <template v-slot:top>
@@ -154,7 +154,7 @@
       <template v-slot:no-data>
         <v-btn
           color="primary"
-          @click="initialize"
+          @click="reset"
         >
           Reset
         </v-btn>
@@ -169,12 +169,15 @@
 </template>
 
 <script>
+
+  
+
   export default {
     name: 'Table',
 
     data: () => ({
-
-       items: ['Ich', 'Teste', 'Hier', 'Einfach', 'Nur'],
+       db:require("../dblogic/dbreq"),
+       items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
 
             search: '',
             dialog: false,
@@ -192,7 +195,9 @@
             { text: 'created', value: 'created' },
             { text: '', value: 'actions', sortable: false },
             ],
+
             links: [],
+
             editedIndex: -1,
             editedItem: {
             from: '',
@@ -223,21 +228,24 @@
             },
         },
 
-        created () {
-            this.initialize()
+        async created () {
+            
+            this.links = await this.initalize();
         },
 
         methods: {
-            initialize () {
-            this.links = [
-                {
-                from: 'Frozen Yogurt',
-                to: 159,
-                domain: 6.0,
-                created: 24,
-                },
-            ]
+
+             async initalize(){
+              var links = await this.db.getLinks()
+              return new Promise((resolve) => {
+                resolve(links)
+              })
             },
+
+            reset(){
+              return this.links
+            },
+            
 
             editItem (item) {
             this.editedIndex = this.links.indexOf(item)
@@ -252,6 +260,7 @@
             },
 
             deleteItemConfirm () {
+            this.db.deleteLink(this.links[this.editedIndex].id)
             this.links.splice(this.editedIndex, 1)
             this.closeDelete()
             },
@@ -273,9 +282,17 @@
             },
 
             save () {
+
+            if(this.editedItem.from == this.defaultItem.from || this.editedItem.to == this.defaultItem.to || this.editedItem.domain == this.defaultItem.domain ){
+              alert("All values must be set");
+              return
+            }
+
             if (this.editedIndex > -1) {
+                this.db.updateLink(this.links[this.editedIndex].id,this.editedItem)
                 Object.assign(this.links[this.editedIndex], this.editedItem)
             } else {
+                this.db.insertLink(this.editedItem)
                 this.links.push(this.editedItem)
             }
             this.close()
@@ -283,3 +300,4 @@
         },
   }
 </script> 
+
