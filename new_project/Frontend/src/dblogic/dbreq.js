@@ -17,7 +17,6 @@ var db = {
             alert("Server unreachable")
             console.log("GET Request to server was unsuccessfull, server either unavailable or not connected to the internet")
           }
-
           xhr.send()
         })  
       },
@@ -26,7 +25,6 @@ var db = {
     
     updateLink(id,editedObject){
             var xhr = new XMLHttpRequest();
-
             xhr.open('PUT',`${this.server}/id=${id}`,true)
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
             xhr.onerror = function(){

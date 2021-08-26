@@ -11,6 +11,7 @@ const app = express();
 //initielles herstellen der DB Verbindung
 db.getConnection();
 
+
 //Middleware
 //Was alles so genutzt werden soll
 

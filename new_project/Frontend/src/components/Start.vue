@@ -247,12 +247,16 @@
             to: '',
             domain: '',
             created: '',
+            status:'',
+            comment:'',
             },
             defaultItem: {
             from: '',
             to: '',
             domain: '',
             created: '',
+            status:'',
+            comment:'',
             },
         }),
 
@@ -327,7 +331,7 @@
 
             async save () {
 
-            if(this.editedItem.from == this.defaultItem.from || this.editedItem.to == this.defaultItem.to || this.editedItem.domain == this.defaultItem.domain ){
+            if(this.editedItem.from == this.defaultItem.from || this.editedItem.to == this.defaultItem.to || this.editedItem.domain == this.defaultItem.domain || this.editedItem.status == this.defaultItem.status ){
               this.alert = true;
               return
             }
