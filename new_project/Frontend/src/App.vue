@@ -2,15 +2,15 @@
   <div id="app">
   <v-app>
 
-  <!-- Tabbar -->
+  <!-- Tabbar -->cd
     <v-app-bar app >
       <v-app-bar-nav-icon @click="toggle=!toggle"></v-app-bar-nav-icon>
       
       <v-tab to="/">Start</v-tab>
-      <v-tab to="/table">Tabelle</v-tab>
-      <v-tab to="/task">Kontakt</v-tab>
+      <!-- <v-tab to="/table">Tabelle</v-tab> -->
+      <v-tab to="/help">Hilfe</v-tab>
 
-      <v-toolbar-title>     DX Dashboard</v-toolbar-title>
+      <v-toolbar-title>     NX Dashboard</v-toolbar-title>
     </v-app-bar>
   <!-- Tabbar -->
 

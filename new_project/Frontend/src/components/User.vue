@@ -19,8 +19,8 @@ export default {
     return {
       activeTab: `/user/${this.id}`,
       tabs: [
-        { id: 1, name: "Task", route: `/user/${this.id}` },
-        { id: 2, name: "Project", route: `/user/${this.id}/project` }
+        { id: 1, name: "Help", route: `/user/${this.id}` },
+        { id: 2, name: "Start", route: `/user/${this.id}/project` }
       ]
     };
   }
