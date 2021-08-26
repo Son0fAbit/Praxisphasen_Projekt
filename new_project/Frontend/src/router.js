@@ -4,6 +4,7 @@ import Router from "vue-router";
 // import User1 from "@/components/User.vue";
 import HelpTab from "@/components/Help.vue";
 import StartTab from "@/components/Start.vue";
+import LoginTab from "@/components/Login.vue";
 // import HelloWorldTab from "@/components/HelloWorld.vue";
 
 Vue.use(Router);
@@ -24,6 +25,11 @@ export default new Router({
         path: "/help",
         name: 'help',
         component: HelpTab
+      },
+      {
+        path: "/login",
+        name: 'login',
+        component: LoginTab
       }
       // ,
       // {

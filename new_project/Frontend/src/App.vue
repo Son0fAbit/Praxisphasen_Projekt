@@ -10,7 +10,11 @@
       <!-- <v-tab to="/table">Tabelle</v-tab> -->
       <v-tab to="/help">Hilfe</v-tab>
 
-      <v-toolbar-title>     NX Dashboard</v-toolbar-title>
+      <v-toolbar-title>NX Dashboard</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+      <v-tab to="/login">Login</v-tab>
+
     </v-app-bar>
   <!-- Tabbar -->
 
