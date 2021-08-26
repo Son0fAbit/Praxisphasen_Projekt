@@ -2,9 +2,10 @@ import Vue from "vue";
 import Router from "vue-router";
 // import HomePage from "@/components/HomePage.vue";
 // import User1 from "@/components/User.vue";
-import TaskTab from "@/components/Task.vue";
-import TableTab from "@/components/Table.vue";
-import HelloWorldTab from "@/components/HelloWorld.vue";
+import HelpTab from "@/components/Help.vue";
+import StartTab from "@/components/Start.vue";
+import LoginTab from "@/components/Login.vue";
+// import HelloWorldTab from "@/components/HelloWorld.vue";
 
 Vue.use(Router);
 
@@ -13,23 +14,29 @@ export default new Router({
   routes: [
     {
         path: "",
-        component: HelloWorldTab
+        component: StartTab
       },
     {
       path: "/start",
       name: 'start',
-      component: HelloWorldTab 
+      component: StartTab 
     },
     {
-        path: "/task",
-        name: 'task',
-        component: TaskTab
+        path: "/help",
+        name: 'help',
+        component: HelpTab
       },
       {
-        path: "/table",
-        name: 'table',
-        component: TableTab
+        path: "/login",
+        name: 'login',
+        component: LoginTab
       }
+      // ,
+      // {
+      //   path: "/table",
+      //   name: 'table',
+      //   component: TableTab
+      // }
     // {
     //   path: "/user/:id",
     //   component: User1,

@@ -2,7 +2,7 @@
   <!-- <v-container>  -->
       
       
-      <div class="table">
+      <div class="help">
           <h1>Hello I am the Backup Database tab</h1>
 
           <v-data-table
