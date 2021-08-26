@@ -113,6 +113,33 @@
                     >
                     </v-col>
                   </v-row>
+                  <v-row>
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-select
+                      :items="status"
+                        v-model="editedItem.status"
+                        label="HTML status code"
+                      ></v-select>
+                    </v-col>
+
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-text-field
+                        v-model="editedItem.comment"
+                        label="Comment"
+                        clearable
+                      ></v-text-field>
+                    </v-col>
+
+                  </v-row>
                 </v-container>
               </v-card-text>
   
@@ -193,6 +220,7 @@
        
       alert: false,
       items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
+      status: ['StatusCode 1', 'StatusCode 2', 'StatusCode 3', 'StatusCode 4', 'StatusCode 5'],
 
             search: '',
             dialog: false,
