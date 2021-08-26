@@ -23,7 +23,9 @@ router.post("/", async (req,res) => {
     var link = {
         from :req.body.from,
         to: req.body.to,
-        domain: req.body.domain
+        domain: req.body.domain,
+        status: req.body.status,
+        comment: req.body.comment
     }
 
     await db.insertOneLink(link);
@@ -65,10 +67,13 @@ router.delete("/id=:id", async (req,res) => {
 
 router.put("/id=:id", async (req,res) => {
     var id = req.params.id;
+
     var link = {
         from :req.body.from,
         to: req.body.to,
-        domain: req.body.domain
+        domain: req.body.domain,
+        status: req.body.status,
+        comment: req.body.comment
     }
 
     await db.updateOneLink(id,link);

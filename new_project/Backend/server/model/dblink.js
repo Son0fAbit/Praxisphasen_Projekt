@@ -36,7 +36,7 @@ class db{
     //GET ALL
     static getLinks(){
         return new Promise((resolve,reject) => {
-        this.con.query("SELECT * FROM links", (err,result,fields) => {
+        this.con.query("SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM links", (err,result,fields) => {
             
             if(err){
                 throw err;
@@ -60,14 +60,16 @@ class db{
                     pad(date.getUTCHours())      + ':' +
                     pad(date.getUTCMinutes())    + ':' +
                     pad(date.getUTCSeconds());
-            
+
             let efrom = this.con.escape(link.from)
             let eto = this.con.escape(link.to)
             let edomain = this.con.escape(link.domain)
+            let estatus = this.con.escape(link.status)
+            let ecomment = this.con.escape(link.comment)
             
             this.con.query
             (
-                `INSERT INTO links (\`from\`,\`to\`,\`domain\`,\`created\`) VALUES (${efrom},${eto},${edomain},'${date}')`
+                `INSERT INTO links (\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\`) VALUES (${efrom},${eto},${edomain},'${date}',${estatus},${ecomment})`
             )
             resolve(); 
         })
@@ -76,7 +78,7 @@ class db{
     //GET ALL DOMAIN LIMIT AND OFFSET --add Injection Sec
     static getLinksOffsetLimited(offset,limit){
         return new Promise((resolve,reject) => {
-        this.con.query(`SELECT \`from\`,\`to\`,\`domain\` FROM \`links\` LIMIT ${offset}, ${limit}`, (err,result,fields) => {
+        this.con.query(`SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM \`links\` LIMIT ${offset}, ${limit}`, (err,result,fields) => {
             
             if(err){
                 throw err;
@@ -90,7 +92,7 @@ class db{
 
     static getLinksOffsetLimitedDomain(offset,limit,domain){
         return new Promise((resolve,reject) => {
-        this.con.query(`SELECT \`from\`,\`to\`,\`domain\` FROM \`links\` WHERE \`domain\`='${domain}' LIMIT ${offset}, ${limit}`, (err,result,fields) => {
+        this.con.query(`SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM \`links\` WHERE \`domain\`='${domain}' LIMIT ${offset}, ${limit}`, (err,result,fields) => {
             
             if(err){
                 throw err;
@@ -104,7 +106,7 @@ class db{
 
     static getLinkById(id){
         return new Promise((resolve,reject) => {
-        this.con.query(`SELECT \`from\`,\`to\`,\`domain\` FROM \`links\` WHERE \`id\`='${id}'`, (err,result,fields) => {
+        this.con.query(`SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM \`links\` WHERE \`id\`='${id}'`, (err,result,fields) => {
             
             if(err){
                 throw err;
@@ -118,15 +120,17 @@ class db{
 
     static updateOneLink(id,link){
         return new Promise(async (resolve,reject) => {
+   
 
-
-
-            var oldLink = await this.getLinkById(id);
+               var oldLink = await this.getLinkById(id);
+            
 
             var newfrom = "'" + oldLink.from + "'";
             var newto = "'" + oldLink.to + "'";
             var newdomain ="'" + oldLink.domain + "'";
-
+            var newstatus = "'" + oldLink.status + "'";
+            var newcomment = "'" + oldLink.comment + "'";
+            
             if(link.from != null){
                 var newfrom = this.con.escape(link.from); 
             }
@@ -136,11 +140,17 @@ class db{
             if(link.domain != null){
                 var newdomain = this.con.escape(link.domain);
             }
+            if(link.status != null){
+                var newstatus = this.con.escape(link.status);
+            }
+            if(link.comment != null){
+                var newcomment = this.con.escape(link.comment);
+            }
 
             // UPDATE `nxdash`.`links` SET `from` = '/hi', `to` = '/rittal/database/hi', `domain` = 'loh-services.com' WHERE (`id` = '7');
             this.con.query
             (
-                `UPDATE links SET \`from\` = ${newfrom} , \`to\` = ${newto} , \`domain\` = ${newdomain} WHERE (\`id\` = ${id})` 
+                `UPDATE links SET \`from\` = ${newfrom} , \`to\` = ${newto} , \`domain\` = ${newdomain} , \`status\` = ${newstatus} , \`comment\` = ${newcomment} WHERE (\`id\` = ${id})` 
             )
             resolve(); 
         })
