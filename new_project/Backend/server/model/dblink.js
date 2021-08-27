@@ -102,6 +102,21 @@ class db{
         })        
     }
 
+
+        //GET SPECFIC DOMAIN  --add Injection Sec
+
+        static getLinksDomain(domain){
+            return new Promise((resolve,reject) => {
+            this.con.query(`SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM \`links\` WHERE \`domain\`='${domain}'`, (err,result,fields) => {
+                
+                if(err){
+                    throw err;
+                } 
+                resolve(result)   
+            })  
+            })        
+        }
+
     //GET BY ID
 
     static getLinkById(id){

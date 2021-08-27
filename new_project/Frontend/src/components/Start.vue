@@ -33,6 +33,19 @@
 
         <v-spacer></v-spacer>
 
+          <v-select
+          :items="filters"
+          v-model="filter"
+          append-icon="mdi-filter"
+          label="Filter"
+          single-line
+          hide-details
+          @input="filterDomain()"
+        ></v-select>
+
+        
+        <v-spacer></v-spacer>
+
           <v-dialog
             v-model="dialog"
             max-width="1000px"
@@ -220,137 +233,152 @@
        
       alert: false,
       items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
+      filters: ['SHOW ALL','rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
       status: ['StatusCode 1', 'StatusCode 2', 'StatusCode 3', 'StatusCode 4', 'StatusCode 5'],
 
-            search: '',
-            dialog: false,
-            dialogDelete: false,
-            headers: [
-            {
-              text: 'Target-URL',
-              align: 'start',
-              //sortable: false,
-              value: 'from',
-            },
-            //{ text: 'Calories', value: 'calories' },
-            { text: 'Destination-URL', value: 'to' },
-            { text: 'Domain', value: 'domain' },
-            { text: 'created', value: 'created' },
-            { text: '', value: 'actions', sortable: false },
-            ],
+      filter: 'SHOW ALL',
+      search: '',
 
-            links: [],
+      dialog: false,
+      dialogDelete: false,
 
-            editedIndex: -1,
-            editedItem: {
-            from: '',
-            to: '',
-            domain: '',
-            created: '',
-            status:'',
-            comment:'',
-            },
-            defaultItem: {
-            from: '',
-            to: '',
-            domain: '',
-            created: '',
-            status:'',
-            comment:'',
-            },
-        }),
 
-        computed: {
-            formTitle () {
-            return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-            },
+      headers: [
+      {
+        text: 'Target-URL',
+        align: 'start',
+        //sortable: false,
+        value: 'from',
+      },
+      //{ text: 'Calories', value: 'calories' },
+      { text: 'Destination-URL', value: 'to' },
+      { text: 'Domain', value: 'domain' },
+      { text: 'created', value: 'created' },
+      { text: '', value: 'actions', sortable: false },
+      ],
+
+      links: [],
+
+        editedIndex: -1,
+        editedItem: {
+        from: '',
+        to: '',
+        domain: '',
+        created: '',
+        status:'',
+        comment:'',
+        },
+        defaultItem: {
+        from: '',
+        to: '',
+        domain: '',
+        created: '',
+        status:'',
+        comment:'',
+        },
+    }),
+
+    computed: {
+        formTitle () {
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        },
+    },
+
+    watch: {
+        dialog (val) {
+        val || this.close()
+        },
+        dialogDelete (val) {
+        val || this.closeDelete()
+        },
+    },
+
+    async created () {
+        
+        this.links = await this.initalize();
+    },
+
+    methods: {
+
+          async initalize(){
+          var links = await db.getLinks()
+          return new Promise((resolve) => {
+            resolve(links)
+          })
         },
 
-        watch: {
-            dialog (val) {
-            val || this.close()
-            },
-            dialogDelete (val) {
-            val || this.closeDelete()
-            },
+        reset(){
+          this.filter = this.filters[0]
+          this.filterDomain()
+          return this.links
+        },
+        
+
+        editItem (item) {
+        this.editedIndex = this.links.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
         },
 
-        async created () {
-            
-            this.links = await this.initalize();
+        async filterDomain(){
+          console.log(this.filter)
+          if(this.filter == this.filters[0]){
+            this.links = await db.getLinks()
+          } else {
+            this.links = await db.getLinksbyDomain(this.filter)
+          }
         },
 
-        methods: {
-
-             async initalize(){
-              var links = await db.getLinks()
-              return new Promise((resolve) => {
-                resolve(links)
-              })
-            },
-
-            reset(){
-              return this.links
-            },
-            
-
-            editItem (item) {
-            this.editedIndex = this.links.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialog = true
-            },
-
-            deleteItem (item) {
-            this.editedIndex = this.links.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialogDelete = true
-            },
-
-            deleteItemConfirm () {
-            db.deleteLink(this.links[this.editedIndex].id)
-            this.links.splice(this.editedIndex, 1)
-            this.closeDelete()
-            },
-
-            close () {
-            this.dialog = false
-            this.alert = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-            },
-
-            closeDelete () {
-            this.dialogDelete = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-            },
-
-            async save () {
-
-            if(this.editedItem.from == this.defaultItem.from || this.editedItem.to == this.defaultItem.to || this.editedItem.domain == this.defaultItem.domain || this.editedItem.status == this.defaultItem.status ){
-              this.alert = true;
-              return
-            }
-
-            if (this.editedIndex > -1) {
-                db.updateLink(this.links[this.editedIndex].id,this.editedItem)
-                Object.assign(this.links[this.editedIndex], this.editedItem)
-            } else {
-                db.insertLink(this.editedItem)
-
-                //Übergangslösung, es werden alle Daten neu geladen, effizienter wäre es nur das eine Object zu laden und dann im Array hinzuzufügen
-                // ist nötig weil Datenbank ID und Datum hinzufügt.
-                this.links = await this.initalize();  
-
-                //this.links.push(this.editedItem)
-            }
-            this.close()
-            },
+        deleteItem (item) {
+        this.editedIndex = this.links.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialogDelete = true
         },
+
+        deleteItemConfirm () {
+        db.deleteLink(this.links[this.editedIndex].id)
+        this.links.splice(this.editedIndex, 1)
+        this.closeDelete()
+        },
+
+        close () {
+        this.dialog = false
+        this.alert = false
+        this.$nextTick(() => {
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.editedIndex = -1
+        })
+        },
+
+        closeDelete () {
+        this.dialogDelete = false
+        this.$nextTick(() => {
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.editedIndex = -1
+        })
+        },
+
+        async save () {
+
+        if(this.editedItem.from == this.defaultItem.from || this.editedItem.to == this.defaultItem.to || this.editedItem.domain == this.defaultItem.domain || this.editedItem.status == this.defaultItem.status ){
+          this.alert = true;
+          return
+        }
+        if (this.editedIndex > -1) {
+            db.updateLink(this.links[this.editedIndex].id,this.editedItem)
+            Object.assign(this.links[this.editedIndex], this.editedItem)
+        } else {
+            db.insertLink(this.editedItem)
+
+            //Übergangslösung, es werden alle Daten neu geladen, effizienter wäre es nur das eine Object zu laden und dann im Array hinzuzufügen
+            // ist nötig weil Datenbank ID und Datum hinzufügt.
+            this.links = await this.initalize();  
+
+            //this.links.push(this.editedItem)
+        }
+        this.close()
+        },
+    },
   }
 </script> 
 

@@ -11,6 +11,8 @@ router.get("/", async (req,res) => {
     res.end(JSON.stringify(dbresponse))
 })
 
+// GET ALL LINKS BEGINNING AT OFFSET UNTIL LIMIT IS REACHED
+
 router.get("/off=:off/lim=:lim", async (req,res) => {
     var offset = req.params.off;
     var limit = req.params.lim;
@@ -18,6 +20,8 @@ router.get("/off=:off/lim=:lim", async (req,res) => {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(dbresponse))
 })
+
+//INSERT ONE LINK
 
 router.post("/", async (req,res) => {
     var link = {
@@ -52,6 +56,14 @@ router.get("/id=:id", async (req,res) => {
     res.end("[" + JSON.stringify(dbresponse) + "]")
 })
 
+//GET BY DOMAIN
+
+router.get("/domain=:domain", async (req,res) => {
+    var domain = req.params.domain;
+    let dbresponse = await db.getLinksDomain(domain);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(dbresponse))
+})
 
 
 //Delete Link

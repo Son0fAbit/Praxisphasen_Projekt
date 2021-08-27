@@ -21,6 +21,24 @@ var db = {
         })  
       },
 
+
+
+      getLinksbyDomain(domain) {
+        return new Promise((resolve) => {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET',`${this.server}/domain=${domain}`,true)
+          xhr.onload = function(){
+              var links = JSON.parse(this.responseText);
+              resolve(links)
+          }
+          xhr.onerror = function(){
+            alert("Server unreachable")
+            console.log("GET Request to server was unsuccessfull, server either unavailable or not connected to the internet")
+          }
+          xhr.send()
+        })  
+      },
+
       //persist Update
     
     updateLink(id,editedObject){
