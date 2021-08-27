@@ -101,15 +101,15 @@
      <!-- Footer -->
 
     <v-footer
-      dark
       padless
+      class="justify-center indigo lighten-1 white--text text-center"
     >
       <v-card
         flat
         tile
         class="indigo lighten-1 white--text text-center"
       >
-        <v-card-text>
+<!--         <v-card-text>
           <v-btn
             v-for="icon in icons"
             :key="icon"
@@ -125,16 +125,16 @@
  
         <v-card-text class="white--text pt-0">
           Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer  
-          Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer
-          Das hier ist ein Test-Footer Das hier ist ein Test-Footer Das hier ist ein Test-Footer
         </v-card-text>
   
-        <v-divider></v-divider>
+        <v-divider></v-divider> -->
   
-        <v-card-text class="white--text">
+        <v-card-text class="white--text" >
           {{ new Date().getFullYear() }} — <strong>Loh-Serivces</strong>
         </v-card-text>
       </v-card>
+
+
     </v-footer>
   <!-- Footer -->
 
