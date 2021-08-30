@@ -26,7 +26,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            color="#e20016"
+            color="#E11126"
             dark
             v-bind="attrs"
             v-on="on"
@@ -102,13 +102,13 @@
 
     <v-footer
       padless
-      color= "#e20016"
+      color= "#E11126"
       class="justify-center white--text text-center"
     >
       <v-card
         flat
         tile
-        color = "#e20016"
+        color = "#E11126"
         class="white--text text-center"
       >
 <!--         <v-card-text>
