@@ -4,7 +4,12 @@
       
       <div class="start">
         <div key="headline">
-          <h1>Hello I am the Database tab</h1>
+          <h1> 
+              Database tab:</h1>
+          <p1>Under this tab you can view all redirects and add new ones, <br> 
+              to add a new one press the "Add Redirect" button and fill in the following form.<br>
+              in the input field "Search" you can also search for a specific redirect. <br>
+              do you want to limit a search result to one domain? then please use the domain filter dropdown-menu. <br> <br> </p1>	
       </div>
           <v-data-table
       :headers="headers"

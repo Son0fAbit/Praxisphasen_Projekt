@@ -2,7 +2,7 @@
   <div id="app">
   <v-app>
 
-  <!-- Tabbar -->cd
+  <!-- Tabbar -->
   <nav>
 
     <v-app-bar app>
