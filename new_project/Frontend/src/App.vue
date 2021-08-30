@@ -26,7 +26,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            color="#E11126"
+            color="#DF4252"
             dark
             v-bind="attrs"
             v-on="on"
@@ -68,7 +68,7 @@
   <!-- Tabbar -->
 
 <!-- Navbar = -->
-    <v-navigation-drawer app v-model="toggle" bottom color="primary" dark>
+    <v-navigation-drawer app v-model="toggle" bottom color="#DF4252" dark>
       <v-list>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
         
@@ -102,13 +102,13 @@
 
     <v-footer
       padless
-      color= "#E11126"
+      color= "#DF4252"
       class="justify-center white--text text-center"
     >
       <v-card
         flat
         tile
-        color = "#E11126"
+        color = "#DF4252"
         class="white--text text-center"
       >
 <!--         <v-card-text>
