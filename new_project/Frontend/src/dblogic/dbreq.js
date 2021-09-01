@@ -45,6 +45,11 @@ var db = {
             var xhr = new XMLHttpRequest();
             xhr.open('PUT',`${this.server}/id=${id}`,true)
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+            xhr.onload = function(){
+              if(this.status != 200){
+                console.log('there was an error')
+              }
+            }
             xhr.onerror = function(){
               console.log("PUT Request to server was unsuccessfull, server either unavailable or not connected to the internet")
             }

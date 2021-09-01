@@ -23,6 +23,8 @@ class db{
             if(err){
                 console.log(err.message);
                 console.log("Could not connect database");
+                err.message = 'Database connection could not be established, check credentials and server status'
+                
             }else{
                 console.log("Database connected successfully")
             }
@@ -39,7 +41,7 @@ class db{
         this.con.query("SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM links", (err,result,fields) => {
             
             if(err){
-                throw err;
+                reject(err.message);
             } 
             resolve(result)   
         })  
@@ -95,7 +97,7 @@ class db{
         this.con.query(`SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM \`links\` WHERE \`domain\`='${domain}' LIMIT ${offset}, ${limit}`, (err,result,fields) => {
             
             if(err){
-                throw err;
+                reject();
             } 
             resolve(result)   
         })  
@@ -124,8 +126,9 @@ class db{
         this.con.query(`SELECT \`id\`,\`from\`,\`to\`,\`domain\`,\`created\`,\`status\`,\`comment\` FROM \`links\` WHERE \`id\`='${id}'`, (err,result,fields) => {
             
             if(err){
-                throw err;
-            } 
+                console.log(err.message)
+                reject(err.message);
+            }   
             resolve(result[0])   
         })  
         })        
@@ -137,7 +140,12 @@ class db{
         return new Promise(async (resolve,reject) => {
    
 
-               var oldLink = await this.getLinkById(id);
+            var oldLink = await this.getLinkById(id);
+
+            if (typeof oldLink === 'undefined'){
+                reject('Passed Id does not match any database object and therefore the object cant be fetched or updated')
+                return
+            }
             
 
             var newfrom = "'" + oldLink.from + "'";

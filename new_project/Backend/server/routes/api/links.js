@@ -9,6 +9,7 @@ router.get("/", async (req,res) => {
     let dbresponse = await db.getLinks()
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(dbresponse))
+    res.end()
 })
 
 // GET ALL LINKS BEGINNING AT OFFSET UNTIL LIMIT IS REACHED
@@ -77,22 +78,37 @@ router.delete("/id=:id", async (req,res) => {
 
 //Update Link
 
-router.put("/id=:id", async (req,res) => {
-    var id = req.params.id;
+router.put("/id=:id", async (req,res,next) => {
 
-    var link = {
-        from :req.body.from,
-        to: req.body.to,
-        domain: req.body.domain,
-        status: req.body.status,
-        comment: req.body.comment
-    }
 
-    await db.updateOneLink(id,link);
-    let dbresponse = db.getLinkById(id);
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(dbresponse));
-    
+    try {
+
+        var id = req.params.id;
+
+        var link = {
+
+            from :req.body.from,
+            to: req.body.to,
+            domain: req.body.domain,
+            status: req.body.status,
+            comment: req.body.comment
+
+        }
+
+        await db.updateOneLink(id,link);
+        let dbresponse = db.getLinkById(id);
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(dbresponse));
+        
+    } catch (error) {
+        res.status(410)
+        res.end('Requested ressource doesnt exist')
+        
+        
+        console.error('called')
+        next(error)
+    }   
+
 })
 
 
