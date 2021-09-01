@@ -77,6 +77,11 @@
                       Please fill out the whole form
                     </v-alert> 
                 </div>
+                <!-- <div>
+                    <v-alert class="mt-2 mb-2"  dense type="error" :value="alertError" transition="slide-y-transition" >
+                      :value="alertMsg"
+                    </v-alert> 
+                </div> -->
                 <v-container>
                   <v-row>
                     <v-col
@@ -237,6 +242,8 @@
       //Importing db functions
        
       alert: false,
+      // alertError: false,
+      // alertMsg,
       items: ['rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
       filters: ['SHOW ALL','rittal.de', 'loh-services.com', 'lkh.de', 'loh-academy.com', 'stahlo.de'],
       status: ['StatusCode 1', 'StatusCode 2', 'StatusCode 3', 'StatusCode 4', 'StatusCode 5'],
@@ -381,6 +388,13 @@
 
             //this.links.push(this.editedItem)
         }
+
+        // if (this.errormsg) {
+        //             this.alertError = true;
+        //             this.alertMsg = errormsg;
+        // }
+
+
         this.close()
         },
     },

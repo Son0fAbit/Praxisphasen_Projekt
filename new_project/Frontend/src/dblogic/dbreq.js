@@ -41,13 +41,14 @@ var db = {
 
       //persist Update
     
-    updateLink(id,editedObject){
+    updateLink(id,editedObject,errormsg){
             var xhr = new XMLHttpRequest();
             xhr.open('PUT',`${this.server}/id=${id}`,true)
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
             xhr.onload = function(){
               if(this.status != 200){
                 console.log('there was an error')
+                errormsg = this.responseText
               }
             }
             xhr.onerror = function(){
