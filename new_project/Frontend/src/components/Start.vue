@@ -370,7 +370,11 @@
           return
         }
         if (this.editedIndex > -1) {
-            db.updateLink(this.links[this.editedIndex].id,this.editedItem)
+
+            let errormessage = await db.updateLink(this.links[this.editedIndex].id,this.editedItem)
+            if(typeof errormessage != 'undefined'){
+              alert(errormessage)
+            }
             Object.assign(this.links[this.editedIndex], this.editedItem)
         } else {
             db.insertLink(this.editedItem)
